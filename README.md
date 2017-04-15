@@ -1,37 +1,24 @@
-## Welcome to GitHub Pages
+#webSocket  简单应用
 
-You can use the [editor on GitHub](https://github.com/zzxBear/index/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+const http=require('http');
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+const io=require('socket.io');
 
-### Markdown
+let server=http.createServer();
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+server.listen(666);
 
-```markdown
-Syntax highlighted code block
+let wsServer=io.listen(server);
 
-# Header 1
-## Header 2
-### Header 3
+let wsServer.on('connection',function(){
+ sock.emit('tick','a')
+})
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+###html代码
 
-**Bold** and _Italic_ and `Code` text
+let sock=io.connect('ws://localhost:666');
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/zzxBear/index/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+sock.on('tick',function(n){
+ console.log(n);
+})
